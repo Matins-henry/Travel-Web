@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./output.css" />
+  <title>GLOBE TREKKER</title>
+   <style>
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .card-shimmer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 91%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 5s infinite;
+        }
+        
+        .floating-card:hover {
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap:3rem;
+            margin-top: 2rem;
+        }
+        
+    </style>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+  <!-- ======================== 🔷 NAVBAR ======================== -->
+  <nav class="relative container mx-auto p-6">
+    <div class="flex items-center justify-between">
+      
+      <!-- 🟠 Logo -->
+      <div class="pt-2">
+        <h1 class="text-1xl text-black font-bold">GLOBE TREKKER</h1>
+      </div>
+
+      <!-- 🔵 Nav Links + Search (Desktop Only) -->
+      <div class="hidden md:flex items-center space-x-6">
+        <!-- Menu Links -->
+        <a href="#" class="text-gray-700 hover:text-orange-900 font-semibold transition">Destinations</a>
+        <a href="#" class="text-gray-700 hover:text-orange-900 font-semibold transition">Stories</a>
+        <a href="#" class="text-gray-700 hover:text-orange-900 font-semibold transition">Tips</a>
+        <a href="#" class="text-gray-700 hover:text-orange-900 font-semibold transition">Gallery</a>
+        <a href="#" class="text-gray-700 hover:text-orange-900 font-semibold transition">About</a>
+
+        <!-- Search Bar -->
+        <form role="search" aria-label="Site Search"
+          class="hidden md:flex items-center border border-gray-300 rounded-full overflow-hidden shadow-sm bg-white">
+          <input
+            type="search"
+            placeholder="Search destinations..."
+            class="px-4 py-2 w-32 lg:w-48 text-sm text-gray-700 placeholder-gray-400 focus:outline-none"
+          />
+          <button type="submit"
+            class="bg-orange-500 hover:bg-orange-600 p-2 rounded-r-full text-white transition"
+            aria-label="Submit Search">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
+            </svg>
+          </button>
+        </form>
+      </div>
+
+      <!-- 🟢 Right Icons: Mobile Search, Explore Button, Hamburger -->
+      <div class="flex items-center gap-2">
+
+        <!-- Search Icon (Mobile) -->
+        <button type="button"
+          class="md:hidden bg-orange-500 hover:bg-orange-600 p-2 rounded-full text-white transition"
+          aria-label="Open Search">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z" />
+          </svg>
+        </button>
+
+        <!-- Explore Button -->
+        <button type="button"
+          class="md:inline-block bg-black hover:bg-white hover:text-black hover:border-black text-white font-semibold px-4 py-2 rounded-full transition-colors duration-400 ease border">
+          Explore
+        </button>
+
+        <!-- Hamburger Menu -->
+        <button id="menu-toggle"
+          class="md:hidden p-2 rounded text-gray-700 hover:text-orange-500 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- 🔻 Mobile Menu (hidden by default) -->
+    <!-- 
+    <div id="mobile-menu" class="md:hidden hidden flex-col gap-4 bg-white shadow px-6 py-4 mt-2 rounded-lg">
+      <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Destinations</a>
+      <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Stories</a>
+      <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Tips</a>
+      <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">Gallery</a>
+      <a href="#" class="text-gray-700 hover:text-orange-500 font-medium">About</a>
+      <a href="#" class="bg-orange-500 text-white text-center py-2 rounded hover:bg-orange-600 transition">Explore</a>
+    </div> 
+    -->
+  </nav>
+
+  <!-- ======================== 🟡 HERO SECTION ======================== -->
+  <section id="hero">
+    <div class="container px-6 mx-auto mt-10 space-y-0">
+
+      <!-- Layout: Column on mobile | Row on desktop -->
+      <div class="flex flex-col md:flex-row items-center">
+
+        <!-- 📍 Left: Hero Text -->
+        <div class="flex flex-col space-y-6 mb-10 md:mb-0 md:w-1/2">
+          <h1 class="text-4xl font-bold md:text-5xl md:text-left">
+            Discover the World's <span class="text-orange-500 underline decoration-orange-500">Hidden</span> Wonders
+          </h1>
+          <p class="text-darkGrayishBlue font-bold md:text-left max-w-sm">
+            The world is full of secret paths, unknown cultures, and breathtaking views.
+            Let's uncover them together, one hidden wonder at a time.
+          </p>
+
+          <!-- Button (Desktop only) -->
+          <button class="hidden md:inline-block bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full transition w-auto self-start">
+            Start Exploring
+          </button>
+        </div>
+
+        <!-- 🖼️ Right: Image Grid -->
+        <div class="grid grid-cols-2 gap-4 md:w-1/2 sm:items-left">
+
+          <!-- Left Tall Image -->
+          <div class="row-span-2 md:mt-10">
+            <img 
+              src="../img/Best mountains ever see😍.jpeg" 
+              alt="Tall Travel Image"
+              class="w-full h-[calc(480px+1rem)] md:h-[380px] object-cover rounded-xl shadow-md"
+            />
+          </div>
+
+          <!-- Top Right Small Image -->
+          <div>
+            <img 
+              src="../img/The Dream City.jpeg" 
+              alt="Top Right"
+              class="w-full h-[250px] object-cover rounded-xl shadow-md"
+            />
+          </div>
+
+          <!-- Bottom Right Small Image -->
+          <div>
+            <img 
+              src="../img/These Swiss Alps Villages Look Like a Fairytale 🏔️.jpeg" 
+              alt="Bottom Right"
+              class="w-full h-[230px] object-cover rounded-xl shadow-md"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- 📱 Button (Mobile only) -->
+      <div class="md:hidden mt-8 w-full flex justify-center">
+        <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full transition">
+          Start Exploring
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================== 🟢 TOP Destination ======================== -->
+   <section id="top-destination" class="px-6 py-12">
+    <div class="container mx-auto ">
+      <!--Section Title-->
+      <h2 class="text-4xl font-bold text-black mt-8  text-center md:text-left">
+        Top Destinations
+      </h2>
+      <!--Flex row: popular + Explore button-->
+      <div class="flex item-center justify-between mt-4">
+        <span class="text-orange-500 font-semibold text-lg">Popular</span>
+        <button class="text-sm font-semibold text-black hover:text-white bg-white px-4 py-2 rounded-full hover:bg-gray-600 transition ">Explore Destination</button>
+      </div>
+    </div>
+
+    <!--carousel image -->
+   <div class="grid-container">
+    <!--Card 1-->
+    <div class="relative overflow-hidden rounded-xl shadow-lg h-96 group cursor-pointer">
+      <!-- Background Image Only -->
+      <img 
+        src="../img/img/Australia.jpg" 
+        alt="Travel Destination" 
+        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+      />
+    </div>
+   </section>
+
+</body>
+</html>
