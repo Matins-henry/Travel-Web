@@ -78,6 +78,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.overlay.classList.add('overlay-fade-in');
                 
                 // Show menu
+                this.mobileMenu.classList.remove('hidden');
+                this.mobileMenu.classList.remove('menu-slide-out'); // Ensure slide-out is not present
                 this.mobileMenu.classList.add('menu-slide-in');
                 this.mobileMenu.style.transform = 'translateX(0)';
                 
@@ -85,11 +87,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.hamburgerIcon.classList.add('hidden');
                 this.closeIcon.classList.remove('hidden');
                 
-                // Add animation to menu items
+                // Animate menu items and ensure they are visible
                 const menuItems = this.mobileMenu.querySelectorAll('nav a');
                 menuItems.forEach((item, index) => {
                     item.style.opacity = '0';
                     item.style.transform = 'translateX(20px)';
+                    item.style.display = 'flex'; // Ensure flex for proper layout
                     setTimeout(() => {
                         item.style.transition = 'all 0.3s ease';
                         item.style.opacity = '1';
@@ -115,11 +118,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.hamburgerIcon.classList.remove('hidden');
                 this.closeIcon.classList.add('hidden');
                 
+                // Hide menu items for accessibility and layout
+                const menuItems = this.mobileMenu.querySelectorAll('nav a');
+                menuItems.forEach(item => {
+                    item.style.opacity = '0';
+                    item.style.display = 'none';
+                });
+                
                 // Clean up after animation
                 setTimeout(() => {
                     this.overlay.classList.add('hidden');
                     this.overlay.classList.remove('overlay-fade-out');
                     this.mobileMenu.classList.remove('menu-slide-out');
+                    this.mobileMenu.classList.add('hidden');
                 }, 300);
             }
         }
