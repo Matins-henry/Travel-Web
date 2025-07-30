@@ -1,21 +1,16 @@
 {
   "name": "travel-web",
   "version": "1.0.0",
-  "private": false,
-  "description": "A travel-themed web project using Tailwind CSS",
-  "author": "Matins",
+  "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run watch:css\" \"npm run copy:assets:dev\"",
-    "watch:css": "tailwindcss -i ./src/input.css -o ./dist/css/output.css --watch",
-    "build": "node build.js",
-    "copy:assets:dev": "node build.js"
+    "build": "npm run build:css && npm run build:copy",
+    "build:css": "tailwindcss -i ./src/input.css -o ./dist/css/output.css --minify",
+    "build:copy": "mkdir dist 2>nul || true && xcopy /E /I /Y src\\*.html dist\\ && xcopy /E /I /Y img dist\\img\\ && xcopy /E /I /Y video dist\\video\\",
+    "dev": "tailwindcss -i ./src/input.css -o ./dist/css/output.css --watch"
   },
   "dependencies": {
-    "tailwindcss": "^3.3.0",
-    "fs-extra": "^11.1.1"
-  },
-  "devDependencies": {
-    "concurrently": "^8.2.0"
-  }}
+    "tailwindcss": "^3.3.0"
+  }
+}}
 }
 }
