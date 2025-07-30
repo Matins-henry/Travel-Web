@@ -2,5 +2,11 @@
   "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "public": true
+  "public": true,
+  "routes": [
+    { "src": "/css/(.*)", "dest": "/css/$1" },
+    { "src": "/img/(.*)", "dest": "/img/$1" },
+    { "src": "/video/(.*)", "dest": "/video/$1" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
 }

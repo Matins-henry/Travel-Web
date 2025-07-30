@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch",
+    "dev": "npx tailwindcss -i ./src/input.css -o ./src/css/output.css --watch",
     "build": "npm install && npm run clean && npm run build:css && npm run copy:files",
-    "build:css": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "build:css": "npx tailwindcss -i ./src/input.css -o ./dist/css/output.css --minify",
     "copy:files": "npm run copy:html && npm run copy:assets",
     "copy:html": "copyfiles -u 1 \"src/**/*.html\" dist/",
-    "copy:assets": "copyfiles -u 1 \"img/**/*\" \"video/**/*\" dist/",
+    "copy:assets": "copyfiles -u 1 \"img/**/*\" dist/img/ && copyfiles -u 1 \"video/**/*\" dist/video/",
     "clean": "rimraf dist"
   },
   "dependencies": {
