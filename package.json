@@ -1,7 +1,9 @@
 {
   "name": "travel-web",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
+  "description": "A travel-themed web project using Tailwind CSS",
+  "author": "Matins",
   "scripts": {
     "dev": "npm run clean && concurrently \"npm run watch:css\" \"npm run copy:assets:dev\"",
     "watch:css": "npx tailwindcss -i ./src/input.css -o ./dist/css/output.css --watch",
