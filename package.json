@@ -1,9 +1,14 @@
 {
+  "name": "travel-web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npm run build:css && npm run copy:html",
+    "build:css": "tailwindcss -i src/input.css -o dist/output.css --minify",
+    "copy:html": "mkdir -p dist && cp src/index.html dist/",
+    "dev": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch"
+  },
   "devDependencies": {
     "tailwindcss": "^3.4.17"
-  },
-  "scripts": {
-    "build": "tailwindcss -i src/input.css -o public/output.css --minify",
-    "dev": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch"
   }
 }
