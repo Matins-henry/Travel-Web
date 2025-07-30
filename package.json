@@ -7,13 +7,13 @@
   "scripts": {
     "dev": "npm run clean && concurrently \"npm run watch:css\" \"npm run copy:assets:dev\"",
     "watch:css": "npx tailwindcss -i ./src/input.css -o ./dist/css/output.css --watch",
-    "build": "npm install && npm run clean && npm run build:css && npm run copy:files",
+    "build": "mkdir -p dist && npm run build:css && npm run copy:files",
     "build:css": "npx tailwindcss -i ./src/input.css -o ./dist/css/output.css --minify",
     "copy:files": "npm run copy:html && npm run copy:assets",
     "copy:html": "copyfiles -u 1 \"src/**/*.html\" dist/",
     "copy:assets": "copyfiles -u 1 \"img/**/*\" dist/img/ && copyfiles -u 1 \"video/**/*\" dist/video/",
     "copy:assets:dev": "copyfiles -u 1 \"img/**/*\" dist/img/ && copyfiles -u 1 \"video/**/*\" dist/video/ --watch",
-    "clean": "rimraf dist"
+    "clean": "rm -rf dist || true"
   },
   "dependencies": {
     "tailwindcss": "^3.3.0"
