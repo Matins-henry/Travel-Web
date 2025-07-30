@@ -6,16 +6,15 @@
   "author": "Matins",
   "scripts": {
     "dev": "concurrently \"npm run watch:css\" \"npm run copy:assets:dev\"",
-    "watch:css": "npx tailwindcss -i ./src/input.css -o ./dist/css/output.css --watch",
-    "build": "node node_modules/tailwindcss/lib/cli.js -i ./src/input.css -o ./dist/css/output.css --minify && npm run copy:files",
-    "copy:files": "npx copyfiles \"src/**/*.html\" dist/ && npx copyfiles \"img/**/*\" dist/img/ && npx copyfiles \"video/**/*\" dist/video/",
-    "copy:assets:dev": "npx copyfiles \"img/**/*\" dist/img/ && npx copyfiles \"video/**/*\" dist/video/ --watch"
+    "watch:css": "tailwindcss -i ./src/input.css -o ./dist/css/output.css --watch",
+    "build": "chmod +x build.sh && ./build.sh",
+    "copy:assets:dev": "mkdir -p dist && cp -r src/*.html dist/ && cp -r img dist/ && cp -r video dist/"
   },
   "dependencies": {
-    "tailwindcss": "^3.3.0",
-    "copyfiles": "^2.4.1"
+    "tailwindcss": "^3.3.0"
   },
   "devDependencies": {
     "concurrently": "^8.2.0"
   }
+}
 }
