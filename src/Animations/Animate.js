@@ -3,9 +3,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // If you're using AOS library
   if (typeof AOS !== 'undefined') {
     AOS.init({
-      duration: 800,
-      easing: 'ease-out',
-      once: true
+      once: true,
+      duration: 600,
+      easing: 'ease-out-cubic',
+      offset: 100,
+      // Respect user preferences for reduced motion
+      disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
     });
   }
   
