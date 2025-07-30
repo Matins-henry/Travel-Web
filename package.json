@@ -3,11 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "node ./node_modules/tailwindcss/lib/cli.js -i ./src/input.css -o ./dist/output.css --minify && npm run copy-files",
-    "copy-files": "mkdir dist 2>/dev/null || true && xcopy /E /I /Y src\\*.html dist\\ && xcopy /E /I /Y img dist\\img\\ && xcopy /E /I /Y video dist\\video\\",
+    "build": "npm install && npm run build:css && npm run copy:files",
+    "build:css": "NODE_ENV=production node node_modules/tailwindcss/lib/cli.js -i ./src/input.css -o ./dist/output.css --minify",
+    "copy:files": "mkdir -p dist && cp -r src/*.html dist/ && cp -r img dist/ && cp -r video dist/",
     "dev": "tailwindcss -i ./src/input.css -o ./src/output.css --watch"
   },
   "dependencies": {
     "tailwindcss": "^3.4.17"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
