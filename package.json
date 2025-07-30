@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "npm run build:css && npm run copy:html",
-    "build:css": "npx tailwindcss -i src/input.css -o dist/output.css --minify",
-    "copy:html": "mkdir -p dist && cp -r src/* dist/ && cp -r img dist/ && cp -r video dist/",
-    "dev": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch"
+    "build": "node ./node_modules/tailwindcss/lib/cli.js -i ./src/input.css -o ./dist/output.css --minify && npm run copy-files",
+    "copy-files": "mkdir dist 2>/dev/null || true && xcopy /E /I /Y src\\*.html dist\\ && xcopy /E /I /Y img dist\\img\\ && xcopy /E /I /Y video dist\\video\\",
+    "dev": "tailwindcss -i ./src/input.css -o ./src/output.css --watch"
   },
-  "devDependencies": {
+  "dependencies": {
     "tailwindcss": "^3.4.17"
   }
 }
