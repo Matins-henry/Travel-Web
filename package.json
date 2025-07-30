@@ -7,16 +7,15 @@
   "scripts": {
     "dev": "concurrently \"npm run watch:css\" \"npm run copy:assets:dev\"",
     "watch:css": "npx tailwindcss -i ./src/input.css -o ./dist/css/output.css --watch",
-    "build": "npx tailwindcss -i ./src/input.css -o ./dist/css/output.css --minify && npm run copy:files",
-    "copy:files": "copyfiles \"src/**/*.html\" dist/ && copyfiles \"img/**/*\" dist/img/ && copyfiles \"video/**/*\" dist/video/",
-    "copy:assets:dev": "copyfiles \"img/**/*\" dist/img/ && copyfiles \"video/**/*\" dist/video/ --watch"
+    "build": "node node_modules/tailwindcss/lib/cli.js -i ./src/input.css -o ./dist/css/output.css --minify && npm run copy:files",
+    "copy:files": "npx copyfiles \"src/**/*.html\" dist/ && npx copyfiles \"img/**/*\" dist/img/ && npx copyfiles \"video/**/*\" dist/video/",
+    "copy:assets:dev": "npx copyfiles \"img/**/*\" dist/img/ && npx copyfiles \"video/**/*\" dist/video/ --watch"
   },
   "dependencies": {
-    "tailwindcss": "^3.3.0"
+    "tailwindcss": "^3.3.0",
+    "copyfiles": "^2.4.1"
   },
   "devDependencies": {
-    "copyfiles": "^2.4.1",
-    "rimraf": "^5.0.1",
     "concurrently": "^8.2.0"
   }
 }
