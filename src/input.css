@@ -2,7 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles can go here */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .menu-item-hover {
+    @apply transition-all duration-300;
+  }
+  
+  .menu-item-hover:hover {
+    @apply transform translate-x-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;
