@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "npx tailwindcss -i ./src/input.css -o ./src/css/output.css --watch",
+    "dev": "npm run clean && concurrently \"npm run watch:css\" \"npm run copy:assets:dev\"",
+    "watch:css": "npx tailwindcss -i ./src/input.css -o ./dist/css/output.css --watch",
     "build": "npm install && npm run clean && npm run build:css && npm run copy:files",
     "build:css": "npx tailwindcss -i ./src/input.css -o ./dist/css/output.css --minify",
     "copy:files": "npm run copy:html && npm run copy:assets",
     "copy:html": "copyfiles -u 1 \"src/**/*.html\" dist/",
     "copy:assets": "copyfiles -u 1 \"img/**/*\" dist/img/ && copyfiles -u 1 \"video/**/*\" dist/video/",
+    "copy:assets:dev": "copyfiles -u 1 \"img/**/*\" dist/img/ && copyfiles -u 1 \"video/**/*\" dist/video/ --watch",
     "clean": "rimraf dist"
   },
   "dependencies": {
@@ -16,6 +18,7 @@
   },
   "devDependencies": {
     "copyfiles": "^2.4.1",
-    "rimraf": "^5.0.1"
+    "rimraf": "^5.0.1",
+    "concurrently": "^8.2.0"
   }
 }
