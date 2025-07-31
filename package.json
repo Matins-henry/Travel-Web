@@ -3,14 +3,22 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "npm run build:css && npm run build:copy",
+    "dev": "npm run clean && concurrently \"npm run watch:css\" \"npm run copy:assets:dev\"",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./dist/css/output.css --watch",
+    "build": "npm run clean && npm run build:css && npm run copy:files",
     "build:css": "tailwindcss -i ./src/input.css -o ./dist/css/output.css --minify",
-    "build:copy": "mkdir dist 2>nul || true && xcopy /E /I /Y src\\*.html dist\\ && xcopy /E /I /Y img dist\\img\\ && xcopy /E /I /Y video dist\\video\\",
-    "dev": "tailwindcss -i ./src/input.css -o ./dist/css/output.css --watch"
+    "copy:files": "npm run copy:html && npm run copy:assets",
+    "copy:html": "copyfiles -u 1 \"src/**/*.html\" dist/",
+    "copy:assets": "copyfiles -u 1 \"img/**/*\" dist/img/ && copyfiles -u 1 \"video/**/*\" dist/video/",
+    "copy:assets:dev": "copyfiles -u 1 \"img/**/*\" dist/img/ && copyfiles -u 1 \"video/**/*\" dist/video/ --watch",
+    "clean": "rimraf dist"
   },
   "dependencies": {
-    "tailwindcss": "^3.3.0"
+    "tailwindcss": "^3.3.0",
+    "copyfiles": "^2.4.1",
+    "rimraf": "^5.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
   }
-}}
-}
 }
