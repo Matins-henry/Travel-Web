@@ -1,0 +1,23 @@
+{
+  "name": "travel-web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run clean && concurrently \"npm run watch:css\" \"npm run copy:assets:dev\"",
+    "build": "npx tailwindcss -i ./src/input.css -o ./dist/css/output.css",
+    "watch:css": "npx tailwindcss -i ./src/input.css -o ./dist/css/output.css --watch",
+    "copy:files": "npm run copy:html && npm run copy:assets",
+    "copy:html": "copyfiles -u 1 \"src/**/*.html\" dist/",
+    "copy:assets": "copyfiles -u 1 \"img/**/*\" dist/img/ && copyfiles -u 1 \"video/**/*\" dist/video/",
+    "copy:assets:dev": "copyfiles -u 1 \"img/**/*\" dist/img/ && copyfiles -u 1 \"video/**/*\" dist/video/ --watch",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "copyfiles": "^2.4.1",
+    "rimraf": "^5.0.1",
+    "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
